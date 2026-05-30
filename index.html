@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GotoMoto Davao</title>
-  <meta name="description" content="GotoMoto Davao serves goto and Filipino favorites — ala carte, catering, food packs, and food carts. Maya St., Ecoland Phase 2, Matina, Davao City." />
+  <meta name="description" content="GotoMoto Davao serves goto and Filipino favorites: ala carte, catering, food packs, and food carts. Maya St., Ecoland Phase 2, Matina, Davao City." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -378,6 +378,22 @@
     @keyframes loader-spin { to { transform: rotate(360deg); } }
     body.is-loading { overflow: hidden; }
 
+    /* Messenger chat-bubble tail */
+    .msg-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -8px; right: 18px;
+      width: 14px; height: 14px;
+      background: inherit;
+      transform: rotate(45deg);
+      box-shadow: 1px 1px 0 0 rgba(42,10,5,0.05);
+    }
+    @keyframes msg-pop {
+      0% { opacity: 0; transform: translateY(8px) scale(.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .msg-bubble { animation: msg-pop .4s ease-out both; }
+
     /* Loader decorations */
     .loader-deco {
       position: absolute;
@@ -415,6 +431,27 @@
 </head>
 
 <body class="font-sans text-brand-ink antialiased is-loading">
+
+  <!-- Floating Messenger CTA -->
+  <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+    <!-- Speech-bubble dialog -->
+    <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener"
+      class="msg-bubble relative rounded-2xl bg-brand-cream text-brand-ink ring-1 ring-brand-ink/10 shadow-xl shadow-brand-ink/20 px-4 py-3 max-w-[14rem] hover:bg-white transition">
+      <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1877F2]">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+        Online
+      </div>
+      <div class="mt-1 font-display font-bold text-base leading-tight">Chat with us! 👋</div>
+      <div class="mt-0.5 text-xs text-brand-ink/60 leading-snug">Tap to message GotoMoto Davao on Messenger.</div>
+    </a>
+    <!-- Messenger circular badge -->
+    <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" aria-label="Chat with us on Messenger"
+      class="relative inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#1877F2] text-white shadow-2xl shadow-[#1877F2]/40 hover:bg-[#0d65d9] hover:scale-105 transition self-end">
+      <span class="absolute inset-0 rounded-full bg-[#1877F2]/40 animate-ping"></span>
+      <svg class="relative w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.1c0 2.8 1.4 5.3 3.6 7v4l3.3-1.8c.9.3 1.9.4 3.1.4 5.5 0 10-4.1 10-9.1S17.5 2 12 2zm1 12.3l-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg>
+      <span class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-[10px] font-bold text-brand-cream ring-2 ring-brand-cream">1</span>
+    </a>
+  </div>
 
   <!-- Page loader -->
   <div id="loader" aria-hidden="true">
@@ -473,7 +510,7 @@
           <a class="nav-link" href="#reviews">Reviews</a>
           <a class="nav-link" href="#contact">Visit</a>
         </nav>
-        <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream text-sm font-semibold px-4 py-2 hover:bg-brand-ember transition">
+        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream text-sm font-semibold px-4 py-2 hover:bg-brand-ember transition">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-3h2.4V9.4c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.2 2.1.2v2.3h-1.2c-1.2 0-1.5.7-1.5 1.5V12h2.6l-.4 3h-2.2v7A10 10 0 0 0 22 12z"/></svg>
           Message us
         </a>
@@ -564,7 +601,7 @@
 
       <!-- Footer: Message us CTA -->
       <div class="p-4 border-t border-brand-ink/10">
-        <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" data-close-slideover
+        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" data-close-slideover
           class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-red hover:bg-brand-ember text-brand-cream font-bold px-4 py-3.5 transition shadow-md shadow-brand-red/30">
           <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1877F2]">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-white">
@@ -605,7 +642,7 @@
             See Party Trays Menu
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-transparent ring-2 ring-brand-cream text-brand-cream font-semibold px-7 py-3.5 hover:bg-brand-cream hover:text-brand-ink transition">
+          <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-transparent ring-2 ring-brand-cream text-brand-cream font-semibold px-7 py-3.5 hover:bg-brand-cream hover:text-brand-ink transition">
             Book Catering
           </a>
         </div>
@@ -651,61 +688,91 @@
             got a setup for it. Pick the format, We'll handle the rekados.
           </p>
         </div>
-        <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="hidden lg:inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-yellow text-brand-ink font-semibold px-6 py-3 hover:bg-brand-yolk transition shadow-lg shadow-black/20">
+        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="hidden lg:inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-yellow text-brand-ink font-semibold px-6 py-3 hover:bg-brand-yolk transition shadow-lg shadow-black/20">
           Inquire now
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
 
-      <div class="mt-14 grid sm:grid-cols-2 gap-5 lg:gap-6">
-        <!-- Ala Carte -->
-        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/10]">
-          <img src="assets/services/alacarte.jpg" alt="Ala Carte at GotoMoto" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy"/>
+      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-6 gap-5 lg:gap-6">
+        <!-- 01 Dine In / Take Out -->
+        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[5/6] lg:col-span-2">
+          <img src="assets/services/alacarte.jpg" alt="Dine In and Take Out at GotoMoto" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy"/>
           <div class="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/55 to-transparent"></div>
           <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">01</span>
+          <div class="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-brand-yellow/95 text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 11h16M6 11v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8M12 3v4M9 5h6" stroke-linecap="round"/></svg>
+            Dine In / Take Out
+          </div>
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
-            <h3 class="font-display font-black text-3xl lg:text-4xl">Ala Carte</h3>
-            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Walk in, sit down, order from the full menu. Goto, silog, sides, and everything in between.</p>
-            <a href="#menu" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+            <h3 class="font-display font-black text-3xl lg:text-4xl">Dine In &amp; Take Out</h3>
+            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Eat in at the shop or grab it to go. Browse the full menu: goto, silog, sides, and bestsellers.</p>
+            <a href="#dine-in-menu" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
               View menu
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </article>
 
-        <!-- Catering -->
-        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/10]">
-          <img src="assets/services/catering.jpg" alt="GotoMoto catering" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy"/>
+        <!-- 02 Food Trays -->
+        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[5/6] lg:col-span-2">
+          <img src="assets/foods/476978042_18037225967604295_9198533938735819402_n.jpg" alt="GotoMoto Food Trays" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy"/>
           <div class="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/55 to-transparent"></div>
           <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">02</span>
+          <div class="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-brand-yellow/95 text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
+            5–12+ pax
+          </div>
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
-            <h3 class="font-display font-black text-3xl lg:text-4xl">Catering</h3>
-            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Birthdays, despedidas, corporate events. Half & full party trays with full setup, delivered ready to serve.</p>
-            <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+            <h3 class="font-display font-black text-3xl lg:text-4xl">Food Trays</h3>
+            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Half &amp; full party trays for potlucks, dinners, and get-togethers. Message us for the latest menu &amp; pricing.</p>
+            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+              Message on FB
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 03 Catering & Food Trays -->
+        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[5/6] lg:col-span-2">
+          <img src="assets/services/catering.jpg" alt="GotoMoto catering" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/55 to-transparent"></div>
+          <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">03</span>
+          <div class="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 13h18M5 13l1 7h12l1-7M12 3v4M9 7h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Full setup
+          </div>
+          <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
+            <h3 class="font-display font-black text-3xl lg:text-4xl">Catering &amp; Food Trays</h3>
+            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Birthdays, despedidas, corporate. Trays with on-site setup, servers, and serving wares, delivered ready to eat.</p>
+            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
               Book a date
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </article>
 
-        <!-- Food Packs -->
-        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/10]">
+        <!-- 04 Food Packs -->
+        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/10] lg:col-span-3">
           <img src="assets/services/food-packs.jpg" alt="GotoMoto food packs" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy"/>
           <div class="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/55 to-transparent"></div>
-          <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">03</span>
+          <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">04</span>
+          <div class="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-brand-yellow/95 text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 8h14l-1 12H6L5 8zM8 8V5a4 4 0 0 1 8 0v3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bulk-friendly
+          </div>
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
             <h3 class="font-display font-black text-3xl lg:text-4xl">Food Packs</h3>
-            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Individual meal packs for meetings, baon, school events, and relief operations. Order in bulk.</p>
-            <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
-              Get a quote
+            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Individual meal packs for meetings, baon, school events, and relief ops. We'll send the full menu and pricing.</p>
+            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+              Request menu
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </article>
 
-        <!-- Food Carts (no photo — designed tile) -->
-        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/10] bg-gradient-to-br from-brand-red via-brand-ember to-brand-ink">
-          <!-- Decorative pattern -->
+        <!-- 05 Food Carts (no photo — designed tile) -->
+        <article class="reveal group relative overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl shadow-black/20 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/10] lg:col-span-3 bg-gradient-to-br from-brand-red via-brand-ember to-brand-ink">
           <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
             <defs>
               <pattern id="dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
@@ -714,16 +781,19 @@
             </defs>
             <rect width="100%" height="100%" fill="url(#dots)"/>
           </svg>
-          <!-- Big cart icon -->
           <svg class="absolute right-6 bottom-24 lg:bottom-28 w-40 h-40 text-brand-yellow/30 group-hover:text-brand-yellow/45 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 7h13v9H6l-3-9zM16 10h4l1 6h-5M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
           </svg>
-          <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">04</span>
+          <span class="absolute top-5 right-5 font-display font-black text-6xl text-brand-yellow drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">05</span>
+          <div class="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-brand-yellow text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
+            On-site
+          </div>
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7 bg-gradient-to-t from-brand-ink/80 to-transparent">
             <h3 class="font-display font-black text-3xl lg:text-4xl">Food Carts</h3>
-            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Mobile goto stations for events, fairs, and pop-ups. We bring the kawa, the rekados, and the smiles.</p>
-            <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
-              Bring one to your event
+            <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Mobile goto stations for events, fairs, and pop-ups. Message us for the latest cart packages and pricing.</p>
+            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+              Request packages
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -878,7 +948,7 @@
           <h2 class="mt-3 font-display font-black text-4xl lg:text-5xl title-underline">Breakfast meals,<br/>kainan na.</h2>
           <p class="mt-5 text-brand-cream/70 leading-relaxed max-w-md">
             Start the day with a hot bowl of goto and a proper silog plate.
-            Eggs, garlic rice, your choice of ulam — all served fresh from the
+            Eggs, garlic rice, your choice of ulam, all served fresh from the
             kitchen.
           </p>
           <a href="#contact" class="mt-7 inline-flex items-center gap-2 rounded-full bg-brand-yellow text-brand-ink font-semibold px-6 py-3 hover:bg-brand-yolk transition">
@@ -907,6 +977,62 @@
   </section>
 
   <!-- PARTY TRAYS MENU -->
+  <!-- DINE-IN MENU BOARDS -->
+  <section id="dine-in-menu" class="relative overflow-hidden bg-brand-ink text-brand-cream py-20 lg:py-28">
+    <!-- Side decorations -->
+    <svg aria-hidden="true" class="hidden md:block absolute -left-8 top-16 w-28 opacity-15 text-brand-yellow rotate-[-12deg] pointer-events-none" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4 V20 M12 4 V14 M20 4 V14 M16 20 V58"/>
+      <path d="M44 4 a8 6 0 0 1 0 12 V58"/>
+    </svg>
+    <svg aria-hidden="true" class="hidden md:block absolute -right-6 bottom-16 w-24 opacity-25 text-brand-yellow rotate-[16deg] pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2 L13.5 9 L20 10.5 L13.5 12 L12 19 L10.5 12 L4 10.5 L10.5 9 z"/>
+    </svg>
+
+    <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
+      <div class="text-center reveal max-w-2xl mx-auto">
+        <h2 class="mt-3 font-display font-black text-4xl lg:text-5xl title-underline center">Dine-in & Take-out</h2>
+        <p class="mt-5 text-brand-cream/70 leading-relaxed">
+          The full lineup served daily at the shop: breakfast silogs, rice bowls,
+          grilled favorites, and our premium goto with sharing plates.
+        </p>
+      </div>
+
+      <div class="mt-12 grid sm:grid-cols-2 gap-5 lg:gap-6">
+        <figure class="reveal relative overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl shadow-black/30 bg-brand-charcoal">
+          <img src="assets/704763215_1885971592043874_6816373024078221879_n.jpg" alt="All-Day Breakfast menu" class="block w-full h-auto" loading="lazy"/>
+          <figcaption class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand-yellow text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke-linecap="round"/></svg>
+            All-Day Breakfast
+          </figcaption>
+        </figure>
+
+        <figure class="reveal relative overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl shadow-black/30 bg-brand-charcoal">
+          <img src="assets/706088412_1030306716221490_4616987786876224848_n.jpg" alt="Rice Bowl Menu" class="block w-full h-auto" loading="lazy"/>
+          <figcaption class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 13 H21 A9 9 0 0 1 3 13z"/></svg>
+            Rice Bowls
+          </figcaption>
+        </figure>
+
+        <figure class="reveal relative overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl shadow-black/30 bg-brand-charcoal">
+          <img src="assets/703966501_2041154396488880_7552337322341014880_n.jpg" alt="Grill Menu" class="block w-full h-auto" loading="lazy"/>
+          <figcaption class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C12 7 8 8 8 13 a4 4 0 0 0 8 0 C16 11 15 10 15 8 C16 9 18 11 18 14 a6 6 0 0 1-12 0 C6 8 12 7 12 3z"/></svg>
+            Grill &amp; BBQ
+          </figcaption>
+        </figure>
+
+        <figure class="reveal relative overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl shadow-black/30 bg-brand-charcoal">
+          <img src="assets/704702147_1666577108009410_1423032285503108184_n.jpg" alt="Premium Goto and For Sharing Menu" class="block w-full h-auto" loading="lazy"/>
+          <figcaption class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand-yellow text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v2a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-2z"/><path d="M9 8c0-2 1-2 1-4M13 8c0-2 1-2 1-4"/></svg>
+            Goto &amp; Sharing
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section id="menu" class="menu-light text-brand-ink py-20 lg:py-28">
     <div class="mx-auto max-w-6xl px-5 lg:px-8">
       <div class="text-center reveal mb-10">
@@ -919,9 +1045,9 @@
           <div class="ornament">GotoMoto · Davao</div>
           <h3 class="page-title">Party Trays Menu</h3>
           <div class="tray-pill">
-            <span>Half — 5–6 pax</span>
+            <span>Half · 5–6 pax</span>
             <span style="color:#B82A18">·</span>
-            <span>Full — 10–12 pax</span>
+            <span>Full · 10–12 pax</span>
           </div>
         </div>
 
@@ -1158,7 +1284,7 @@
       </div><!-- /menu-page -->
 
       <div class="mt-12 text-center reveal">
-        <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream font-semibold px-7 py-3.5 shadow-lg shadow-brand-red/25 hover:bg-brand-ember transition">
+        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-brand-red text-brand-cream font-semibold px-7 py-3.5 shadow-lg shadow-brand-red/25 hover:bg-brand-ember transition">
           Book a party tray
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -1266,7 +1392,7 @@
             on Facebook so we can lock your slot.
           </p>
         </div>
-        <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener"
+        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener"
           class="inline-flex shrink-0 items-center gap-3 rounded-full bg-brand-red text-brand-cream font-semibold px-6 py-3.5 hover:bg-brand-ember transition shadow-lg shadow-brand-red/25">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#1877F2]">
             <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -1277,7 +1403,7 @@
 
       <!-- Contact cards grid -->
       <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-        <a href="https://www.facebook.com/gotomotodavao/" target="_blank" rel="noopener" class="reveal group relative rounded-2xl bg-brand-ink text-brand-cream p-6 ring-1 ring-brand-ink/10 hover:bg-brand-charcoal transition shadow-lg">
+        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="reveal group relative rounded-2xl bg-brand-ink text-brand-cream p-6 ring-1 ring-brand-ink/10 hover:bg-brand-charcoal transition shadow-lg">
           <span class="inline-flex w-11 h-11 rounded-xl bg-brand-yellow text-brand-ink items-center justify-center group-hover:scale-105 transition">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-3h2.4V9.4c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.2 2.1.2v2.3h-1.2c-1.2 0-1.5.7-1.5 1.5V12h2.6l-.4 3h-2.2v7A10 10 0 0 0 22 12z"/></svg>
           </span>
