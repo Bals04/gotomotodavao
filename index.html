@@ -392,7 +392,14 @@
       0% { opacity: 0; transform: translateY(8px) scale(.95); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .msg-bubble { animation: msg-pop .4s ease-out both; }
+    .msg-bubble { animation: msg-pop .4s ease-out both; transform-origin: bottom right; }
+    .msg-bubble.is-collapsed {
+      animation: none;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(.9);
+      transition: opacity .25s ease, transform .25s ease;
+    }
 
     /* Loader decorations */
     .loader-deco {
@@ -433,24 +440,31 @@
 <body class="font-sans text-brand-ink antialiased is-loading">
 
   <!-- Floating Messenger CTA -->
-  <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+  <div id="msgWidget" class="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
     <!-- Speech-bubble dialog -->
-    <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener"
-      class="msg-bubble relative rounded-2xl bg-brand-cream text-brand-ink ring-1 ring-brand-ink/10 shadow-xl shadow-brand-ink/20 px-4 py-3 max-w-[14rem] hover:bg-white transition">
-      <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1877F2]">
-        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-        Online
-      </div>
-      <div class="mt-1 font-display font-bold text-base leading-tight">Chat with us! 👋</div>
-      <div class="mt-0.5 text-xs text-brand-ink/60 leading-snug">Tap to message GotoMoto Davao on Messenger.</div>
-    </a>
+    <div id="msgBubble" class="msg-bubble relative rounded-2xl bg-brand-cream text-brand-ink ring-1 ring-brand-ink/10 shadow-xl shadow-brand-ink/20 pl-4 pr-9 py-3 max-w-[15rem]">
+      <button id="msgClose" type="button" aria-label="Minimize chat"
+        class="absolute top-2 right-2 inline-flex items-center justify-center w-6 h-6 rounded-full text-brand-ink/50 hover:bg-brand-ink/10 hover:text-brand-ink transition">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+      </button>
+      <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="block">
+        <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1877F2]">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+          Online
+        </div>
+        <div class="mt-1 font-display font-bold text-base leading-tight">Chat with us! 👋</div>
+        <div class="mt-0.5 text-xs text-brand-ink/60 leading-snug">Tap to message GotoMoto Davao on Messenger.</div>
+      </a>
+    </div>
     <!-- Messenger circular badge -->
-    <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" aria-label="Chat with us on Messenger"
+    <button id="msgBadge" type="button" aria-label="Chat with us on Messenger"
       class="relative inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#1877F2] text-white shadow-2xl shadow-[#1877F2]/40 hover:bg-[#0d65d9] hover:scale-105 transition self-end">
       <span class="absolute inset-0 rounded-full bg-[#1877F2]/40 animate-ping"></span>
       <svg class="relative w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.1c0 2.8 1.4 5.3 3.6 7v4l3.3-1.8c.9.3 1.9.4 3.1.4 5.5 0 10-4.1 10-9.1S17.5 2 12 2zm1 12.3l-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg>
-      <span class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-[10px] font-bold text-brand-cream ring-2 ring-brand-cream">1</span>
-    </a>
+      <span id="msgDot" class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-[10px] font-bold text-brand-cream ring-2 ring-brand-cream">1</span>
+    </button>
   </div>
 
   <!-- Page loader -->
@@ -688,7 +702,7 @@
             got a setup for it. Pick the format, We'll handle the rekados.
           </p>
         </div>
-        <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="hidden lg:inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-yellow text-brand-ink font-semibold px-6 py-3 hover:bg-brand-yolk transition shadow-lg shadow-black/20">
+        <a href="https://www.facebook.com/messages/t/100390988929898" target="_blank" rel="noopener" class="hidden lg:inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-yellow text-brand-ink font-semibold px-6 py-3 hover:bg-brand-yolk transition shadow-lg shadow-black/20">
           Inquire now
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -726,7 +740,7 @@
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
             <h3 class="font-display font-black text-3xl lg:text-4xl">Food Trays</h3>
             <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Half &amp; full party trays for potlucks, dinners, and get-togethers. Message us for the latest menu &amp; pricing.</p>
-            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+            <a href="https://www.facebook.com/messages/t/100390988929898" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
               Message on FB
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -745,7 +759,7 @@
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
             <h3 class="font-display font-black text-3xl lg:text-4xl">Catering &amp; Food Trays</h3>
             <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Birthdays, despedidas, corporate. Trays with on-site setup, servers, and serving wares, delivered ready to eat.</p>
-            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+            <a href="https://www.facebook.com/messages/t/100390988929898" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
               Book a date
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -764,7 +778,7 @@
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7">
             <h3 class="font-display font-black text-3xl lg:text-4xl">Food Packs</h3>
             <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Individual meal packs for meetings, baon, school events, and relief ops. We'll send the full menu and pricing.</p>
-            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+            <a href="https://www.facebook.com/messages/t/100390988929898" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
               Request menu
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -792,7 +806,7 @@
           <div class="absolute inset-x-0 bottom-0 p-6 lg:p-7 bg-gradient-to-t from-brand-ink/80 to-transparent">
             <h3 class="font-display font-black text-3xl lg:text-4xl">Food Carts</h3>
             <p class="mt-2 text-sm lg:text-base text-brand-cream/85 leading-relaxed max-w-md">Mobile goto stations for events, fairs, and pop-ups. Message us for the latest cart packages and pricing.</p>
-            <a href="https://m.me/gotomotodavao" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
+            <a href="https://www.facebook.com/messages/t/100390988929898" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] font-bold text-brand-yellow group-hover:gap-2.5 transition-all">
               Request packages
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -1454,6 +1468,30 @@
   </footer>
 
   <script>
+    // Messenger widget — collapsible bubble
+    const msgBubble = document.getElementById('msgBubble');
+    const msgClose  = document.getElementById('msgClose');
+    const msgBadge  = document.getElementById('msgBadge');
+    const msgDot    = document.getElementById('msgDot');
+    if (msgBubble && msgClose && msgBadge) {
+      const collapsed = localStorage.getItem('msgCollapsed') === '1';
+      if (collapsed) msgBubble.classList.add('is-collapsed');
+      msgClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        msgBubble.classList.add('is-collapsed');
+        localStorage.setItem('msgCollapsed', '1');
+      });
+      msgBadge.addEventListener('click', () => {
+        if (msgBubble.classList.contains('is-collapsed')) {
+          msgBubble.classList.remove('is-collapsed');
+          localStorage.removeItem('msgCollapsed');
+          if (msgDot) msgDot.style.display = 'none';
+        } else {
+          window.open('https://m.me/gotomotodavao', '_blank', 'noopener');
+        }
+      });
+    }
+
     // Page loader — hide after 2s, then animate counters
     window.addEventListener('load', () => {
       setTimeout(() => {
