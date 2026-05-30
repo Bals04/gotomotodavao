@@ -1468,6 +1468,19 @@
   </footer>
 
   <script>
+    // Messenger destination — open the app on mobile (m.me), chat window on desktop
+    const FB_PAGE_ID = '100068553356236';
+    const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    const MSG_URL = IS_MOBILE
+      ? 'https://m.me/' + FB_PAGE_ID
+      : 'https://www.facebook.com/messages/t/' + FB_PAGE_ID;
+    // Rewrite all Messenger links on mobile so they deep-link into the app
+    if (IS_MOBILE) {
+      document.querySelectorAll('a[href*="facebook.com/messages/t/"]').forEach((a) => {
+        a.setAttribute('href', MSG_URL);
+      });
+    }
+
     // Messenger widget — collapsible bubble
     const msgBubble = document.getElementById('msgBubble');
     const msgClose  = document.getElementById('msgClose');
@@ -1487,7 +1500,7 @@
           localStorage.removeItem('msgCollapsed');
           if (msgDot) msgDot.style.display = 'none';
         } else {
-          window.open('https://www.facebook.com/messages/t/100068553356236', '_blank', 'noopener');
+          window.open(MSG_URL, '_blank', 'noopener');
         }
       });
     }
